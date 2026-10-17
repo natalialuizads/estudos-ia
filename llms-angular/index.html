@@ -2,390 +2,386 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Melhor LLM para Angular</title>
-<meta name="description" content="Resumo em português da série Agentic Engineering (Angular Architects): modelos, harnesses, apps, custos, privacidade e skills.">
-<link rel="stylesheet" href="styles.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 </head>
 <body>
-<header class="top">
-  <nav class="wrap">
-    <a class="brand" href="#topo">LLMs para Angular</a>
-    <div class="links">
-      <a href="#ranking">Ranking</a>
-      <a href="#modelos">Modelos</a>
-      <a href="#harness">Harness</a>
-      <a href="#mcp">MCP</a>
-      <a href="#custos">Custos</a>
-      <a href="#privacidade">Privacidade</a>
-      <a href="#setup">Setup</a>
-      <a href="#skills">Skills</a>
-      <a href="#escolher">Qual escolher?</a>
-    </div>
-  </nav>
+<title>Angular com IA</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600&display=swap">
+<style>
+/* Layout: referência densa de uma coluna: dados em tabelas, receitas em blocos de código copiáveis. */
+:root{--bg:#f6f6f9;--fg:#17181d;--mut:#585b66;--card:#fff;--line:#dfe0e8;--acc:#c3002f;--acc2:#fdebef;--g:#15803d;--y:#a16207;--r:#b91c1c;--on-acc:#fff;--code:#eceef5;
+--display:"Bricolage Grotesque",system-ui,sans-serif;--body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111218;--fg:#ececf1;--mut:#a2a5b2;--card:#1a1b23;--line:#2e303b;--acc:#ff6b8a;--acc2:#2c1720;--g:#4ade80;--y:#facc15;--r:#f87171;--on-acc:#1a0a10;--code:#0c0d12;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111218;--fg:#ececf1;--mut:#a2a5b2;--card:#1a1b23;--line:#2e303b;--acc:#ff6b8a;--acc2:#2c1720;--g:#4ade80;--y:#facc15;--r:#f87171;--on-acc:#1a0a10;--code:#0c0d12;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 var(--body)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:11;background:var(--bg)}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.15}
+h1{font-size:clamp(1.9rem,6vw,2.8rem);margin:.2em 0 .1em}
+h2{font-size:1.5rem;margin:0 0 .6em}
+h3{font-size:1.05rem;margin:1.6em 0 .5em}
+section{padding-top:36px}
+a{color:var(--acc)}
+code,pre{font-family:var(--mono)}
+code{background:var(--code);padding:.1em .35em;border-radius:4px;font-size:.88em}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;height:48px;align-items:center}
+.top a{padding:6px 10px;border-radius:8px;color:var(--mut);text-decoration:none;white-space:nowrap;font-size:.88rem}
+.top a:hover,.top a.on{background:var(--acc2);color:var(--acc)}
+.sub{color:var(--mut);margin:0 0 20px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:.88rem;min-width:560px}
+th,td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.hl td{background:var(--acc2)}
+.pod{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.pod div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.pod b{display:block;font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin-bottom:4px}
+.pod ol{margin:0;padding-left:1.2em}
+.bars{display:grid;gap:5px;margin:0 0 6px}
+.bar{display:grid;grid-template-columns:140px 1fr 40px;gap:10px;align-items:center;font-size:.85rem}
+.bt{background:var(--line);border-radius:5px;height:12px;overflow:hidden}
+.bf{display:block;height:100%;background:var(--acc)}
+.bv{text-align:right;font-variant-numeric:tabular-nums;color:var(--mut)}
+.steps{list-style:none;counter-reset:s;padding:0;margin:0;display:grid;gap:14px}
+.steps>li{counter-increment:s;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px 14px 56px;position:relative;min-width:0}
+.steps>li::before{content:counter(s);position:absolute;left:14px;top:14px;width:28px;height:28px;border-radius:50%;background:var(--acc);color:var(--on-acc);display:grid;place-items:center;font-weight:700;font-size:.9rem}
+.steps h3{margin:0 0 .3em}
+.steps ul,ul.l{margin:.3em 0;padding-left:1.2em}
+.steps li li,ul.l li{margin:.2em 0}
+.code{position:relative;margin:.6em 0}
+.code pre{margin:0;background:var(--code);border:1px solid var(--line);border-radius:8px;padding:10px 12px;overflow-x:auto;font-size:.8rem;line-height:1.5}
+.code .f{font-family:var(--mono);font-size:.72rem;color:var(--mut);margin-bottom:3px}
+.code button{position:absolute;right:6px;top:22px;font:inherit;font-size:.72rem;padding:3px 9px;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer}
+.code button:hover{border-color:var(--acc);color:var(--acc)}
+.tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
+.tl div{border-radius:10px;padding:4px 14px 12px;background:var(--card);border:1px solid var(--line);border-top:4px solid}
+.tl .g{border-top-color:var(--g)}.tl .y{border-top-color:var(--y)}.tl .r{border-top-color:var(--r)}
+.chk{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+.chk li{display:flex;gap:10px;align-items:flex-start}
+.chk input{margin-top:5px;accent-color:var(--acc)}
+.chk label{cursor:pointer}
+.calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;align-items:end;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px}
+.calc label{display:grid;gap:3px;font-size:.78rem;color:var(--mut)}
+.calc input,.calc select{font:inherit;padding:7px;border-radius:7px;border:1px solid var(--line);background:var(--bg);color:var(--fg);width:100%}
+.calc output{grid-column:1/-1}
+.wiz{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.wiz fieldset{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:8px 14px;margin:0;min-width:0}
+.wiz legend{font-weight:600;padding:0 4px;font-size:.9rem}
+.wiz label{display:block;padding:2px 0;cursor:pointer}
+.wiz input{accent-color:var(--acc)}
+#answer{margin-top:10px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+#answer p{margin:.3em 0}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.src{padding-bottom:max(48px,env(safe-area-inset-bottom,0px));color:var(--mut);font-size:.85rem}
+.src li{margin:.2em 0}
+@media (max-width:600px){.bar{grid-template-columns:100px 1fr 38px;font-size:.78rem}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+
+<div class="top"><div class="wrap" id="nav">
+  <a href="#escolha">Escolha rápida</a><a href="#dados">Dados</a><a href="#usar">Como usar</a><a href="#mcp">MCP</a><a href="#regras">Regras</a><a href="#assistente">Assistente</a><a href="#fontes">Fontes</a>
+</div></div>
+
+<main class="wrap">
+<header style="padding-top:40px">
+  <h1>Angular com IA</h1>
+  <p class="sub">Dados da série Agentic Engineering (Angular Architects, mai–set/2026) e o passo a passo para aplicar. Números são fotos de data: DeepSWE v1.1 em 26/ago/2026.</p>
 </header>
 
-<main id="topo">
-<section class="hero wrap">
-  <p class="eyebrow">Resumo da série “Agentic Engineering” · Alexander Thalhammer, Angular Architects</p>
-  <h1>Qual IA usar para programar Angular?</h1>
-  <p class="lead">Em 2026 a resposta mudou várias vezes. Este guia resume os 9 artigos da série (mai–set/2026) em um só lugar: <strong>modelo</strong>, <strong>harness</strong>, <strong>app</strong>, <strong>custo</strong> e <strong>privacidade</strong>.</p>
-  <div class="tldr">
-    <h2>Em 30 segundos</h2>
-    <ul>
-      <li><strong>Modelos (ago/2026):</strong> 🥇 Fable 5 (arquitetura e problemas longos), 🥈 GPT‑5.6 Sol (implementação do dia a dia), 🥉 GLM‑5.3 Flash (rápido e barato para trabalho mecânico).</li>
-      <li><strong>Fluxo preferido do autor:</strong> o modelo caro <em>planeja e revisa</em>; um modelo mais barato <em>implementa</em> como sub‑agente.</li>
-      <li><strong>O harness importa tanto quanto o modelo:</strong> o mesmo modelo rende bem diferente em ferramentas diferentes.</li>
-      <li><strong>Métrica que importa:</strong> custo por mudança <em>aceita, revisada e mergeada</em> — não preço por token.</li>
-      <li><strong>Sempre:</strong> revisar todo diff e nunca enviar segredos ou dados de produção para a IA.</li>
-    </ul>
+<section id="escolha">
+  <h2>Escolha rápida</h2>
+  <div class="tw"><table>
+    <thead><tr><th>Tarefa</th><th>Modelo</th><th>Esforço</th><th>Onde rodar</th></tr></thead>
+    <tbody>
+      <tr><td>Arquitetura, design, revisão, problema vago ou longo</td><td>Fable 5.1</td><td>medium (high se difícil)</td><td>Claude Code</td></tr>
+      <tr><td>Implementação com escopo claro</td><td>GPT‑5.6 Sol</td><td>medium–high</td><td>Codex</td></tr>
+      <tr><td>Refatorar, modernizar, resolver merge conflict</td><td>GPT‑5.6 Sol</td><td>high</td><td>Codex</td></tr>
+      <tr><td>Mecânico: renomear, <code>input()</code>, <code>@if</code>/<code>@for</code>, gerar testes</td><td>GLM‑5.3 Flash</td><td>max (custa centavos)</td><td>opencode + OpenRouter</td></tr>
+      <tr><td>Edição pequena</td><td>qualquer um</td><td>low</td><td>—</td></tr>
+      <tr><td>Aplicativo (GUI) para tudo</td><td>—</td><td>—</td><td>T3 Code (open source, multi‑modelo)</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Pódios (ago/2026)</h3>
+  <div class="pod">
+    <div><b>Modelos</b><ol><li>Fable 5</li><li>GPT‑5.6 Sol</li><li>GLM‑5.3 Flash</li></ol></div>
+    <div><b>Harnesses</b><ol><li>opencode</li><li>Claude Code</li><li>Cursor CLI</li></ol></div>
+    <div><b>Apps</b><ol><li>T3 Code</li><li>Codex app</li><li>Cursor</li></ol></div>
+    <div><b>Custo por mudança aceita</b><ol><li>GLM‑5.3 Flash</li><li>GPT‑5.6 Sol</li><li>Fable 5</li></ol></div>
   </div>
-  <p class="note">⚠️ É uma opinião pessoal baseada em trabalho real com Angular, <strong>não um benchmark científico</strong>. Os próprios autores repetem: teste no seu código. Números são fotos de datas específicas.</p>
 </section>
 
-<section id="ranking" class="wrap">
-  <h2>Como o ranking mudou</h2>
-  <p>Os modelos giram rápido; os apps, a cada poucos meses; o setup do harness quase não muda.</p>
-  <ol class="timeline">
-    <li>
-      <time>Mai/2026</time>
-      <h3>Primeiro ranking</h3>
-      <p>🥇 Opus 4.7 (melhor para Angular) · GPT 5.5 (melhor “todo‑terreno”) · Composer 2.5 (novato rápido e barato) · Gemini 3.5 Flash (experimental).</p>
-    </li>
-    <li>
-      <time>9 jun/2026</time>
-      <h3>Fable 5 chega</h3>
-      <p>Nova geração da Anthropic: escreve código “melhor do que eu escreveria”, aguenta problemas longos sozinho. Foi desligado em 12/jun por uma diretiva do governo dos EUA e voltou em 2/jul.</p>
-    </li>
-    <li>
-      <time>Ago/2026</time>
-      <h3>Atualização de verão</h3>
-      <p>Novo trio: Fable 5, GPT‑5.6 Sol e GLM‑5.3 Flash. App favorito vira o T3 Code (open source).</p>
-    </li>
-    <li>
-      <time>Set/2026</time>
-      <h3>Fable 5.1</h3>
-      <p>Substitui o Fable 5 no setup do autor; esforço padrão cai para <em>medium</em> sem perda perceptível.</p>
-    </li>
+<section id="dados">
+  <h2>Dados</h2>
+  <h3>DeepSWE v1.1 — pass@1 (±3–4 pts)</h3>
+  <div class="bars" id="bars" role="img" aria-label="DeepSWE por modelo"></div>
+
+  <h3>Custo por tarefa (DeepSWE, euros aprox.)</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Modelo</th><th class="n">Score</th><th class="n">€/tarefa</th><th>Esforço</th></tr></thead>
+    <tbody>
+      <tr><td>Opus 5</td><td class="n">74%</td><td class="n">11</td><td>max</td></tr>
+      <tr><td>Opus 5</td><td class="n">73%</td><td class="n">5,50</td><td>high</td></tr>
+      <tr><td>GPT‑5.6 Sol</td><td class="n">73%</td><td class="n">6</td><td>max</td></tr>
+      <tr class="hl"><td>GPT‑5.6 Sol</td><td class="n">69%</td><td class="n">2,50</td><td>high</td></tr>
+      <tr><td>Fable 5</td><td class="n">70%</td><td class="n">20</td><td>max</td></tr>
+      <tr><td>Fable 5</td><td class="n">69%</td><td class="n">8,50</td><td>high</td></tr>
+      <tr class="hl"><td>Fable 5</td><td class="n">65%</td><td class="n">5,50</td><td>medium</td></tr>
+      <tr><td>GLM‑5.3 / Kimi K3</td><td class="n">69%</td><td class="n">~4</td><td>max</td></tr>
+      <tr class="hl"><td>GLM‑5.3 Flash</td><td class="n">63%</td><td class="n">0,25</td><td>max</td></tr>
+      <tr><td>DeepSeek V4 Pro / Flash</td><td class="n">63% / 53%</td><td class="n">&lt;2 / ~0,45</td><td>—</td></tr>
+      <tr><td>GPT‑5.6 Luna</td><td class="n">67% / 44%</td><td class="n">—</td><td>max / high</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub" style="margin-top:8px">Fable gasta ~119k tokens de saída por tarefa no max contra ~60k do Sol. Mesmo modelo, esforço diferente: +1 ponto custa ~2x.</p>
+
+  <h3>Harness (Artificial Analysis, mesmo Opus 4.7 medium)</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Harness</th><th class="n">Índice</th><th class="n">DeepSWE</th></tr></thead>
+    <tbody><tr><td>opencode</td><td class="n">51</td><td class="n">~40%</td></tr><tr><td>Cursor CLI</td><td class="n">47</td><td class="n">~32%</td></tr><tr><td>Claude Code</td><td class="n">42</td><td class="n">~27%</td></tr></tbody>
+  </table></div>
+  <p class="sub" style="margin-top:8px">Por tarefa: Codex + Sol ≈ €4,50 e ~10 min · Claude Code + Opus 5 (xhigh) ≈ €7,50 · Claude Code + Fable ≈ €11 · ambos Claude ~24 min.</p>
+
+  <h3>Preços</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Item</th><th>Valor</th></tr></thead>
+    <tbody>
+      <tr><td>Assinaturas</td><td>€20 (início) · €100 · €200 (≈20x). Cursor: €20 / €60 / €200; Team €40/usuário</td></tr>
+      <tr><td>Início recomendado</td><td>OpenAI Plus + Anthropic Pro = €40/mês; +Cursor Pro = €60</td></tr>
+      <tr><td>API por 1M tokens (entrada / saída)</td><td>GPT 5.5 ≈ €5 / €30 · Opus 4.8 ≈ €5 / €25 · Fable ≈ €10 / €50</td></tr>
+      <tr><td>Fable 5: retenção</td><td>30 dias, sem zero retenção, mesmo em enterprise</td></tr>
+      <tr><td>Fable 5: velocidade</td><td>1–3 min mesmo em tarefa simples</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Calculadora de API</h3>
+  <div class="calc">
+    <label>Modelo<select id="cModel"><option value="5,30">GPT 5.5 (€5 / €30)</option><option value="5,25">Opus 4.8 (€5 / €25)</option><option value="10,50">Fable (€10 / €50)</option></select></label>
+    <label>Tokens de entrada<input id="cIn" type="number" value="200000" min="0" step="10000"></label>
+    <label>Tokens de saída<input id="cOut" type="number" value="20000" min="0" step="1000"></label>
+    <label>Turnos<input id="cTurns" type="number" value="20" min="1"></label>
+    <output id="cRes" aria-live="polite"></output>
+  </div>
+</section>
+
+<section id="usar">
+  <h2>Como usar, passo a passo</h2>
+  <ol class="steps">
+    <li><h3>Contrate o mínimo</h3>
+      <ul><li>OpenAI Plus + Anthropic Pro (€40). Suba para €100 só no provedor em que bater o limite.</li><li>Empresa: use plano Team/Enterprise/API, não conta pessoal.</li></ul></li>
+
+    <li><h3>Prepare o projeto (uma vez)</h3>
+      <ul><li>Pre‑commit com lint e formatação:</li></ul>
+      <div class="code"><div class="f">terminal</div><pre>pnpm add -D husky</pre></div>
+      <ul><li>Crie <code>style-guide/style-guide.md</code>: stack alvo e regras Faça / Deveria / Não faça. É o arquivo de maior efeito.</li><li>Crie <code>AGENTS.md</code> (veja “Regras” abaixo).</li><li>Um arquivo fino por ferramenta (<code>.cursorrules</code>, <code>.clinerules</code>, <code>.gemini/GEMINI.md</code>, <code>.github/copilot-instructions.md</code>) apontando para o <code>AGENTS.md</code>.</li></ul></li>
+
+    <li><h3>Bloqueie segredos</h3>
+      <div class="code"><div class="f">.claude/settings.json</div><pre>{
+  "permissions": {
+    "deny": ["Read(./.env)", "Read(./.env.*)", "Read(*.pem)", "Read(*.key)", "Read(./src/environments/**)"]
+  }
+}</pre><button type="button">Copiar</button></div></li>
+
+    <li><h3>Conecte o MCP do Angular CLI</h3>
+      <p style="margin:.2em 0">Detalhes na seção MCP abaixo. Arquivo <code>.mcp.json</code> na raiz, registrado uma vez para todos os agentes.</p></li>
+
+    <li><h3>Fluxo por tarefa</h3>
+      <ol class="l">
+        <li><b>Planeje</b> com Fable (medium): objetivo, restrições, critério de pronto.</li>
+        <li><b>Implemente</b> com Sol (ou GLM Flash se for mecânico), thread nova por tarefa.</li>
+        <li><b>Verifique</b> em ordem do mais barato ao mais caro: <code>ng lint</code> → <code>ng build</code> → testes → E2E (Playwright).</li>
+        <li><b>Revise</b> o diff linha a linha. Peça segunda opinião a outro modelo.</li>
+        <li><b>Commit.</b> Se o agente errou de novo no mesmo ponto, corrija o <code>AGENTS.md</code>, não só o prompt.</li>
+      </ol></li>
+
+    <li><h3>Delegação: Fable pensa, Sol digita</h3>
+      <div class="code"><div class="f">.claude/agents/gpt-implementer.md</div><pre>---
+name: gpt-implementer
+description: Delegates well-specified implementation tasks to GPT-5.6 Sol via the Codex CLI. Use for mechanical, clearly spec'd legwork, not for architecture or design decisions.
+tools: Bash, Read, Grep, Glob
+---
+You are a thin wrapper around the Codex CLI. Take the task you were given, write it into a single self-contained prompt (all relevant file paths, constraints, and acceptance criteria included, Codex starts with zero conversation context), then run:
+codex exec -m gpt-5.6-sol "&lt;your prompt&gt;"
+Return Codex's output as your result. Do not implement anything yourself.</pre><button type="button">Copiar</button></div></li>
+
+    <li><h3>Contexto de 1M no Codex (opcional)</h3>
+      <div class="code"><div class="f">~/.codex/config.toml (antes de qualquer [seção])</div><pre>model = "gpt-5.6-sol"
+model_context_window = 1000000
+model_auto_compact_token_limit = 900000</pre><button type="button">Copiar</button></div>
+      <div class="code"><div class="f">uso pontual, sem alterar o padrão</div><pre>codex -m gpt-5.6-sol \
+  -c model_context_window=1000000 \
+  -c model_auto_compact_token_limit=900000</pre><button type="button">Copiar</button></div></li>
+
+    <li><h3>Skills para o que se repete</h3>
+      <ul><li>Pasta <code>.agents/skills/&lt;nome&gt;/SKILL.md</code> (lida por Codex, Cursor e Claude Code).</li><li>Skills globais: copie para <code>~/.claude/skills/</code>.</li></ul>
+      <div class="code"><div class="f">SKILL.md</div><pre>---
+name: ng-refactor
+description: Moderniza um componente legado em passos com checkpoint humano. Use quando o usuário pedir "refatore", "modernize" ou "migre para signals" em um componente.
+---
+## Passos
+1. Analisar  2. Limpar  3. Atualizar  4. Modernizar  5. Tipar  6. Refatorar  7. Revisar
+Pare após cada passo e peça aprovação.</pre><button type="button">Copiar</button></div>
+      <ul><li>Descrição = “o que faz + quando usar”, com as frases que você digitaria. Corpo &lt; 500 linhas; detalhe em <code>references/</code>.</li><li>Codifique processo, não conhecimento. Copie só as skills que o projeto usa.</li></ul></li>
+
+    <li><h3>Teste na sua base antes de decidir</h3>
+      <p style="margin:.2em 0">Rode as mesmas 5 tarefas em Codex, Claude e Cursor. Compare diff, passos de correção e limites atingidos:</p>
+      <ul><li>Migrar componente para <code>input()</code>/<code>output()</code> e <code>@if</code>/<code>@for</code></li><li>Testes de um serviço com dependências</li><li>Code review de um PR real</li><li>Rebase de uma branch com vários conflitos</li><li>Bug descrito como “comportamento atual” e “esperado”</li></ul></li>
   </ol>
-
-  <h3>Pódio de agosto/2026</h3>
-  <div class="podium">
-    <article><h4>Modelos</h4><ol><li>🥇 Fable 5</li><li>🥈 GPT‑5.6 Sol</li><li>🥉 GLM‑5.3 Flash</li></ol></article>
-    <article><h4>Harnesses</h4><ol><li>🥇 opencode</li><li>🥈 Claude Code</li><li>🥉 Cursor CLI</li></ol></article>
-    <article><h4>Apps</h4><ol><li>🥇 T3 Code</li><li>🥈 Codex app</li><li>🥉 Cursor</li></ol></article>
-    <article><h4>Custo por mudança aceita</h4><ol><li>🥇 GLM‑5.3 Flash</li><li>🥈 GPT‑5.6 Sol</li><li>🥉 Fable 5</li></ol></article>
-  </div>
 </section>
 
-<section id="modelos" class="wrap">
-  <h2>Modelos</h2>
-  <p>Não existe benchmark público específico de Angular. O autor cruza benchmarks gerais (principalmente o <strong>DeepSWE</strong>) com a experiência dele.</p>
-
-  <h3>DeepSWE v1.1 (pass@1, snapshot de 26/ago/2026)</h3>
-  <p class="small">Mede se o agente acha o lugar certo no código e implementa uma mudança a partir de um pedido curto. Margem de erro de ±3 a ±4 pontos: os três primeiros empatam estatisticamente.</p>
-  <div id="bars" class="bars" role="img" aria-label="Gráfico de barras do DeepSWE por modelo"></div>
-
-  <h3>Perfil de cada modelo</h3>
-  <div class="chips" id="filters" role="group" aria-label="Filtrar modelos">
-    <button class="chip on" data-f="todos">Todos</button>
-    <button class="chip" data-f="qualidade">Qualidade máxima</button>
-    <button class="chip" data-f="equilibrio">Equilíbrio</button>
-    <button class="chip" data-f="barato">Barato / rápido</button>
-  </div>
-  <div class="cards" id="cards"></div>
-
-  <h3>E os outros?</h3>
-  <ul class="plain">
-    <li><strong>Gemini / Antigravity:</strong> o autor acha o Google “bem atrás” dos três grandes; o Gemini tende a usar idiomas antigos de Angular e precisa de mais direcionamento.</li>
-    <li><strong>Modelos chineses (DeepSeek, Qwen, Kimi, GLM):</strong> melhoraram muito; GLM‑5.3 Flash entrou no pódio. Kimi K3 e GLM‑5.3 completos chegam a 69%, mas custam ~€4 por tarefa.</li>
-    <li><strong>Europeus (Mistral):</strong> opção estratégica quando residência de dados importa, não líderes em código.</li>
-    <li><strong>Locais / open‑weight:</strong> úteis para privacidade e CI, mas ainda não no nível dos favoritos para Angular corporativo. Atenção: “open weights” não é “open source”.</li>
-  </ul>
-</section>
-
-<section id="harness" class="wrap">
-  <h2>Modelo, harness e app não são a mesma coisa</h2>
-  <div class="layers">
-    <div class="layer l1"><strong>Modelo</strong><span>O cérebro (ex.: Opus, GPT). Só gera texto.</span></div>
-    <div class="layer l2"><strong>Harness</strong><span>O software em volta: dá ferramentas (ler, buscar, editar, rodar <code>ng build</code>) e executa o laço “propõe → executa → lê resultado → decide”.</span></div>
-    <div class="layer l3"><strong>App</strong><span>A janela onde você vê tudo (desktop, terminal, extensão de IDE).</span></div>
-  </div>
-  <p>O mesmo harness vive em vários apps (Claude Code roda no app desktop, CLI, VS Code, JetBrains). E o mesmo modelo muda de resultado conforme o harness: num teste da Artificial Analysis com o <em>mesmo Opus 4.7 (medium)</em>, opencode fez 51, Cursor CLI 47 e Claude Code 42.</p>
-
-  <div class="grid2">
-    <article class="box">
-      <h3>Apps (“super apps”)</h3>
-      <ul class="plain">
-        <li><strong>T3 Code</strong> — open source, qualquer modelo/provedor, controle remoto pelo celular via Tailscale, sidebar tipo “caixa de entrada”.</li>
-        <li><strong>Codex app</strong> — o mais polido; ótimo para “computer use” (navegador, screenshots). Só modelos da OpenAI.</li>
-        <li><strong>Claude Desktop</strong> — casa natural do Claude Code; fora do pódio desde que o T3 Code faz o mesmo com mais modelos.</li>
-        <li><strong>Cursor</strong> — melhor integração com IDE e agentes na nuvem; atenção: acesso a modelos OpenAI via Cursor pode acabar em 12/nov.</li>
-        <li><strong>Antigravity 2.0</strong> — promissor, mas ainda “desajeitado e com bugs”.</li>
-      </ul>
-    </article>
-    <article class="box">
-      <h3>Harnesses e IDEs</h3>
-      <ul class="plain">
-        <li><strong>opencode</strong> — open source, agnóstico de modelo; ponto de partida recomendado no terminal.</li>
-        <li><strong>Pi</strong> — minimalista, para quem gosta de customizar.</li>
-        <li><strong>Claude Code</strong> — excelente para orquestrar sub‑agentes (<code>.claude/agents/</code>), hooks e <code>/loop</code>.</li>
-        <li><strong>Cline</strong> — extensão open source para VS Code/JetBrains; pode usar suas assinaturas.</li>
-        <li><strong>VS Code + Copilot</strong> — o autor desaconselha como base: o agente ainda fica um passo atrás.</li>
-        <li><strong>WebStorm + Junie</strong> — bom para trabalho cuidadoso “feito à mão”.</li>
-      </ul>
-    </article>
-  </div>
-
-  <div class="callout">
-    <h3>Seu código também é um fator</h3>
-    <p>O agente <em>imita</em> o que lê. Em código limpo e moderno, ele escreve código limpo. Em legado (NgModules, <code>*ngIf</code>, RxJS onde caberiam signals), ele copia a bagunça. <strong>Quanto pior o código, mais o setup do harness importa.</strong></p>
-  </div>
-</section>
-
-<section id="mcp" class="wrap">
-  <h2>Servidor MCP do Angular CLI</h2>
-  <p>O Angular CLI traz um servidor <strong>MCP</strong> (Model Context Protocol) oficial. Ele dá ao agente <em>ferramentas de ação</em> para falar direto com o CLI: analisar o workspace, buscar na documentação, compilar e rodar testes. Funciona com Cursor, Antigravity, JetBrains AI, VS Code etc. É a forma oficial de resolver o corte de conhecimento do modelo: ele consulta a doc atual em vez de lembrar de versões antigas.</p>
-
-  <h3>Como ativar</h3>
-  <p>Configure sua IDE ou CLI para rodar <code>npx -y @angular/cli mcp</code>. O arquivo muda por ferramenta:</p>
-  <div class="grid2">
-    <article class="box"><h4>Cursor</h4><p class="small"><code>.cursor/mcp.json</code> (ou global em <code>~/.cursor/mcp.json</code>)</p>
-<pre>{
+<section id="mcp">
+  <h2>MCP do Angular CLI</h2>
+  <div class="code"><div class="f">.mcp.json / .cursor/mcp.json / .antigravity/mcp.json</div><pre>{
   "mcpServers": {
     "angular-cli": {
       "command": "npx",
       "args": ["-y", "@angular/cli", "mcp"]
     }
   }
-}</pre></article>
-    <article class="box"><h4>VS Code</h4><p class="small"><code>.vscode/mcp.json</code> (note: a chave é <code>servers</code>)</p>
-<pre>{
+}</pre><button type="button">Copiar</button></div>
+  <div class="code"><div class="f">.vscode/mcp.json (a chave é "servers")</div><pre>{
   "servers": {
     "angular-cli": {
       "command": "npx",
       "args": ["-y", "@angular/cli", "mcp"]
     }
   }
-}</pre></article>
-  </div>
-  <p class="small">Antigravity usa o mesmo formato do Cursor, em <code>.antigravity/mcp.json</code>.</p>
-
-  <h3>Ferramentas disponíveis (padrão)</h3>
-  <div class="tools">
-    <div><code>list_projects</code><span>Lista apps e libs do workspace lendo o <code>angular.json</code>.</span></div>
-    <div><code>get_best_practices</code><span>Guia de boas práticas alinhado à versão (standalone, formulários tipados etc.).</span></div>
-    <div><code>search_documentation</code><span>Busca na documentação oficial do angular.dev.</span></div>
-    <div><code>run_target</code><span>Executa um alvo configurado: build, test, lint, e2e, deploy.</span></div>
-    <div><code>devserver_start</code><span>Inicia o <code>ng serve</code> de forma assíncrona.</span></div>
-    <div><code>devserver_wait_for_build</code><span>Devolve os logs do build mais recente do dev server.</span></div>
-    <div><code>devserver_stop</code><span>Para o dev server.</span></div>
-    <div><code>onpush_zoneless_migration</code><span>Gera o plano, passo a passo, para migrar a OnPush (pré-requisito do zoneless).</span></div>
-    <div><code>ai_tutor</code><span>Tutor interativo de Angular.</span></div>
-  </div>
-
-  <h3>Fluxos típicos</h3>
-  <div class="grid2">
-    <article class="box"><h4>Feature com laço de TDD</h4>
-      <ol class="plain"><li><code>search_documentation</code> para conferir APIs (ex.: opções do <code>@defer</code>)</li><li><code>get_best_practices</code> para carregar as regras da sua versão</li><li><code>devserver_start</code> e <code>devserver_wait_for_build</code> ao editar</li><li>Escrever o teste (descobrindo o framework via <code>list_projects</code>) e rodar <code>run_target</code> com <code>test</code></li><li><code>devserver_stop</code> ao terminar</li></ol></article>
-    <article class="box"><h4>Migração zoneless / OnPush</h4>
-      <ol class="plain"><li><code>list_projects</code> para localizar os componentes</li><li>Rodar migrações de signals via <code>ng generate</code></li><li><code>onpush_zoneless_migration</code> com o caminho do componente</li><li>Aplicar a única mudança devolvida e testar com <code>run_target</code></li><li>Repetir até a ferramenta indicar que terminou</li></ol></article>
-  </div>
-  <p>O terceiro fluxo é o de <strong>aprendizado</strong>: <code>ai_tutor</code> carrega o currículo e o agente guia você em um sandbox.</p>
-
-  <h3>Opções de linha de comando</h3>
-  <ul class="plain">
-    <li><code>--read-only</code> registra só ferramentas que <strong>não modificam</strong> o projeto (bom para começar com segurança).</li>
-    <li><code>--local-only</code> registra só ferramentas que <strong>não precisam de internet</strong> (útil em ambientes restritos; desliga, por exemplo, a busca na documentação).</li>
+}</pre><button type="button">Copiar</button></div>
+  <div class="tw"><table>
+    <thead><tr><th>Ferramenta</th><th>Função</th></tr></thead>
+    <tbody>
+      <tr><td><code>list_projects</code></td><td>Apps e libs do <code>angular.json</code></td></tr>
+      <tr><td><code>get_best_practices</code></td><td>Boas práticas da sua versão</td></tr>
+      <tr><td><code>search_documentation</code></td><td>Busca no angular.dev</td></tr>
+      <tr><td><code>run_target</code></td><td>build, test, lint, e2e, deploy</td></tr>
+      <tr><td><code>devserver_start</code> / <code>devserver_wait_for_build</code> / <code>devserver_stop</code></td><td>Dev server assíncrono e logs do build</td></tr>
+      <tr><td><code>onpush_zoneless_migration</code></td><td>Plano passo a passo para OnPush/zoneless</td></tr>
+      <tr><td><code>ai_tutor</code></td><td>Tutor interativo</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Flags</h3>
+  <div class="tw"><table><thead><tr><th>Flag</th><th>Efeito</th></tr></thead><tbody>
+    <tr><td><code>--read-only</code></td><td>Só ferramentas que não alteram o projeto</td></tr>
+    <tr><td><code>--local-only</code></td><td>Só ferramentas sem internet (sem busca na doc)</td></tr>
+  </tbody></table></div>
+  <h3>Sequências prontas</h3>
+  <ul class="l">
+    <li><b>Feature:</b> <code>search_documentation</code> → <code>get_best_practices</code> → <code>devserver_start</code> → editar + <code>devserver_wait_for_build</code> → teste via <code>run_target</code> (<code>test</code>) → <code>devserver_stop</code></li>
+    <li><b>Zoneless:</b> <code>list_projects</code> → migrações de signals via <code>ng generate</code> → <code>onpush_zoneless_migration</code> (caminho do componente) → aplicar a mudança → <code>run_target</code> (<code>test</code>) → repetir até terminar</li>
   </ul>
-  <pre class="solo">"args": ["-y", "@angular/cli", "mcp", "--read-only"]</pre>
-
-  <div class="callout">
-    <h3>MCP + Skills = agente completo</h3>
-    <p>As skills oficiais do Angular dão a <em>orientação</em> (padrões e instruções); o MCP dá as <em>ações</em> (compilar, testar, analisar). Juntos cobrem o que a série chama de “ferramentas + procedimentos”. No setup do autor, o MCP do Angular CLI é registrado uma única vez em <code>.mcp.json</code> para todos os agentes.</p>
-  </div>
-  <p class="small">Fonte: <a href="https://angular.dev/ai/mcp">angular.dev/ai/mcp</a>. Segurança: o servidor roda comandos no seu projeto; lembre do semáforo de privacidade e prefira <code>--read-only</code> quando possível.</p>
 </section>
 
-<section id="custos" class="wrap">
-  <h2>Custos</h2>
-  <p>Assinaturas são <strong>subsidiadas</strong>: são, de longe, o melhor negócio hoje. Mas são para uso humano — não para CI ou backend de produto — e em empresa precisam casar com compras e políticas.</p>
-
-  <div class="steps">
-    <div><b>€40/mês</b><span>OpenAI Plus + Anthropic Pro: ponto de partida recomendado.</span></div>
-    <div><b>€60/mês</b><span>Some Cursor Pro por um mês para comparar três apps.</span></div>
-    <div><b>€100</b><span>Suba o plano do provedor que virou seu gargalo.</span></div>
-    <div><b>€200</b><span>Só para uso realmente pesado (~20x).</span></div>
-  </div>
-  <p class="small">Preços originais em dólar; euros aproximados. Confira as páginas oficiais antes de decidir.</p>
-
-  <h3>Calculadora rápida de custo por API</h3>
-  <p class="small">Valores do artigo de ago/2026 (por milhão de tokens, sem desconto de cache/batch). Ajuste e veja o custo de um “turno” do agente.</p>
-  <div class="calc">
-    <label>Modelo
-      <select id="cModel">
-        <option value="5,30">GPT 5.5 (≈ €5 in / €30 out)</option>
-        <option value="5,25">Claude Opus 4.8 (≈ €5 in / €25 out)</option>
-        <option value="10,50">Fable 5 (≈ €10 in / €50 out)</option>
-      </select>
-    </label>
-    <label>Tokens de entrada <input id="cIn" type="number" value="200000" min="0" step="10000"></label>
-    <label>Tokens de saída <input id="cOut" type="number" value="20000" min="0" step="1000"></label>
-    <label>Turnos <input id="cTurns" type="number" value="20" min="1"></label>
-    <output id="cRes" aria-live="polite"></output>
-  </div>
+<section id="regras">
+  <h2>Regras prontas</h2>
+  <h3><code>AGENTS.md</code>: regras de comportamento</h3>
+  <div class="code"><div class="f">AGENTS.md</div><pre>## Workflow
+- Preserve my edits. Check a file's current state before changing it; do not revert or drop my changes or comments.
+- Keep fixes local. Change the minimum needed. No opportunistic refactors; suggest them instead.
+- Stay in your lane. Do not touch unrelated files; prefer minimal diffs.
+- Run lint and the relevant tests before declaring a task done.
+- Never start the dev server (ng serve); one is usually running on :4200.</pre><button type="button">Copiar</button></div>
 
   <h3>Esforço de raciocínio</h3>
-  <ul class="plain">
-    <li><strong>Low</strong> — edições pequenas · <strong>Medium</strong> — implementação normal · <strong>High</strong> — bugs difíceis, criar componente, refatoração · <strong>Extra/Max</strong> — quando errar custa mais que os tokens.</li>
-    <li>Regra do autor: comece em high; se o resultado for perfeito, reduza. Para o Fable, medium já basta (65% no DeepSWE por ~€5,50/tarefa).</li>
+  <div class="tw"><table><thead><tr><th>Nível</th><th>Use em</th></tr></thead><tbody>
+    <tr><td>low</td><td>Edições pequenas</td></tr>
+    <tr><td>medium</td><td>Implementação normal; Fable 5.1 por padrão</td></tr>
+    <tr><td>high</td><td>Bugs difíceis, criar componente, refatoração</td></tr>
+    <tr><td>extra / max</td><td>Quando errar custa mais que os tokens</td></tr>
+  </tbody></table></div>
+
+  <h3>Economia (checklist)</h3>
+  <ul class="chk">
+    <li><input type="checkbox" id="k1"><label for="k1">Sol é o padrão, Fable é a exceção</label></li>
+    <li><input type="checkbox" id="k2"><label for="k2">Esforço medium/high, não max</label></li>
+    <li><input type="checkbox" id="k3"><label for="k3">Plano antes da execução longa</label></li>
+    <li><input type="checkbox" id="k4"><label for="k4">Thread nova por tarefa; <code>AGENTS.md</code> curto; pouca saída de terminal</label></li>
+    <li><input type="checkbox" id="k5"><label for="k5">Trabalho braçal para sub‑agente barato</label></li>
+    <li><input type="checkbox" id="k6"><label for="k6">Medir custo por mudança aceita, não por token</label></li>
   </ul>
 
-  <h3>Como economizar o Fable</h3>
-  <ol class="plain num">
-    <li><strong>Sol é o padrão, Fable é a exceção</strong> (vago, arquitetura, revisão, longo prazo).</li>
-    <li>Esforço medium/high, não max (max dobra a conta por ~1 ponto).</li>
-    <li><strong>Planeje antes</strong>, depois deixe rodar.</li>
-    <li>Contexto enxuto: thread nova por tarefa, <code>AGENTS.md</code> curto, pouca saída de terminal.</li>
-    <li><strong>Delegue o trabalho braçal</strong> a um sub‑agente mais barato.</li>
+  <h3>Privacidade</h3>
+  <div class="tl">
+    <div class="g"><h3>Verde</h3>Estudo, experimento, código público. Conta pessoal serve.</div>
+    <div class="y"><h3>Amarelo</h3>Código proprietário. Só Team, Enterprise, Business ou API.</div>
+    <div class="r"><h3>Vermelho</h3>Segredos, credenciais, dados de produção, clientes e pessoais. Nunca no contexto.</div>
+  </div>
+  <ul class="chk" style="margin-top:12px">
+    <li><input type="checkbox" id="p1"><label for="p1">Sem treino não é sem retenção: confirme retenção e opt‑out por escrito</label></li>
+    <li><input type="checkbox" id="p2"><label for="p2">Sandbox e aprovação de comandos ativos; MCP e conectores só os necessários</label></li>
+    <li><input type="checkbox" id="p3"><label for="p3">Fable 5: avalie a retenção de 30 dias antes de usar em código regulado</label></li>
+    <li><input type="checkbox" id="p4"><label for="p4">UE: contrato de processamento de dados, residência de dados, AI Act (fiscalização desde 2/ago/2026)</label></li>
+    <li><input type="checkbox" id="p5"><label for="p5">Todo diff gerado passa por revisão humana</label></li>
+  </ul>
+</section>
+
+<section id="assistente">
+  <h2>Assistente de escolha</h2>
+  <div class="wiz">
+    <fieldset><legend>Código</legend><label><input type="radio" name="q1" value="sim"> Proprietário de empresa</label><label><input type="radio" name="q1" value="nao"> Público / estudo</label></fieldset>
+    <fieldset><legend>Orçamento</legend><label><input type="radio" name="q2" value="baixo"> ~€20–40</label><label><input type="radio" name="q2" value="medio"> €60–100</label><label><input type="radio" name="q2" value="alto"> €200+ ou empresa paga</label></fieldset>
+    <fieldset><legend>Ambiente</legend><label><input type="radio" name="q3" value="app"> App</label><label><input type="radio" name="q3" value="ide"> IDE</label><label><input type="radio" name="q3" value="term"> Terminal</label></fieldset>
+  </div>
+  <div id="answer" aria-live="polite">Marque as três opções.</div>
+</section>
+
+<section id="fontes" class="src">
+  <h2>Fontes</h2>
+  <ol>
+    <li><a href="https://www.angulararchitects.io/blog/best-llms-for-angular/">Which LLM Is Best for Angular Development?</a></li>
+    <li><a href="https://www.angulararchitects.io/blog/ai-apps-harnesses-for-angular/">Which App/Harness Is Best?</a></li>
+    <li><a href="https://www.angulararchitects.io/blog/ai-costs-for-angular/">What Does AI Coding Really Cost?</a></li>
+    <li><a href="https://www.angulararchitects.io/blog/ai-data-privacy-for-angular/">What Do AI Coding Tools Do With Your Code?</a></li>
+    <li><a href="https://www.angulararchitects.io/blog/ai-personal-verdict/">Agentic Verdict</a></li>
+    <li><a href="https://www.angulararchitects.io/blog/ai-next-gen-model/">First Next‑Gen Model (Fable 5)</a></li>
+    <li><a href="https://www.angulararchitects.io/blog/ae-harness-setup-for-angular/">How to Set Up Your Harness</a></li>
+    <li><a href="https://www.angulararchitects.io/blog/ae-summer-2026-update-for-angular/">Summer 2026 Update</a></li>
+    <li><a href="https://www.angulararchitects.io/blog/ae-skills-for-angular/">Skills for Angular Development</a></li>
+    <li><a href="https://angular.dev/ai/mcp">Angular CLI MCP Server</a></li>
   </ol>
-  <p class="small">Custo por tarefa no DeepSWE (high → max): Fable ≈ €8,50 → €20 · Opus 5 ≈ €5,50 → €11 · GPT‑5.6 Sol ≈ €2,50 → €6 · GLM‑5.3 Flash ≈ €0,25.</p>
-</section>
-
-<section id="privacidade" class="wrap">
-  <h2>Privacidade: não proíba, aprove caminhos seguros</h2>
-  <p>Agentes enviam muito mais que o prompt: trechos de código, diffs, saída de terminal, caminhos, screenshots, stack traces… E eles <strong>executam comandos</strong>, o que cria risco de vazamento (a “tríade letal”: dados privados + conteúdo não confiável + saída para a rede).</p>
-
-  <div class="traffic">
-    <div class="g"><h3>🟢 Verde</h3><p>Aprendizado, experimentos, código público/open source. Assinatura pessoal serve.</p></div>
-    <div class="y"><h3>🟡 Amarelo</h3><p>Código proprietário. Só em termos aprovados: business, team, enterprise ou API.</p></div>
-    <div class="r"><h3>🔴 Vermelho</h3><p>Segredos, credenciais, dados de produção/clientes/pessoais regulados. Nunca no contexto da IA.</p></div>
-  </div>
-
-  <ul class="plain">
-    <li><strong>“Sem treino” ≠ “sem retenção”.</strong> Provedores podem reter dados por abuso, segurança, depuração ou obrigação legal.</li>
-    <li><strong>Planos pessoais vs. comerciais:</strong> pessoais podem usar seus dados para treino se você não desativar; planos comerciais e API normalmente não treinam por padrão.</li>
-    <li><strong>Fable 5:</strong> exige retenção de 30 dias, sem opção de zero retenção — pode inviabilizar setores regulados.</li>
-    <li><strong>Esconda segredos do agente:</strong> bloqueie <code>.env</code>, <code>*.pem</code>, <code>*.key</code> e <code>environment*.ts</code> (no Claude Code, via <code>permissions.deny</code>).</li>
-    <li><strong>Na UE:</strong> LGPD/GDPR, contrato de processamento de dados, residência de dados e, a partir de 2/ago/2026, fiscalização do AI Act.</li>
-  </ul>
-  <details>
-    <summary>Perguntas a fazer a qualquer fornecedor</summary>
-    <ul class="plain">
-      <li>Meu código é usado para treino por padrão? Dá para desativar na organização toda?</li>
-      <li>O que é retido, onde e por quanto tempo? Há zero retenção ou processamento regional?</li>
-      <li>Quais subprocessadores? Há revisão humana?</li>
-      <li>Como tratam prompts, diffs, screenshots e saída de terminal?</li>
-      <li>Admins podem desligar conectores, navegador, servidores MCP e agentes na nuvem?</li>
-    </ul>
-  </details>
-</section>
-
-<section id="setup" class="wrap">
-  <h2>Setup do harness para Angular (5 passos)</h2>
-  <p>O repositório de exemplo do autor é o <code>ng-agentic</code>. A ideia: o agente só escreve o Angular que <em>você</em> quer se o ambiente disser como.</p>
-  <ol class="setup">
-    <li><h3>Base limpa</h3><p>Comece de um <code>ng new</code> atual (ou identifique a base legada que você já tem).</p></li>
-    <li><h3>Formatação e lint obrigatórios</h3><p>Hook de pre‑commit (Husky) para rodar Prettier/ESLint em todo commit, venha o código de você ou da IA.</p></li>
-    <li><h3>Guia de estilo ⭐</h3><p>O arquivo de <strong>maior alavancagem</strong> de todo o setup. O modelo sabe Angular genérico; o guia diz como <em>seu time</em> escreve (Vitest em vez de Jest, signals em vez de RxJS, zoneless, etc.).</p></li>
-    <li><h3><code>AGENTS.md</code> como contrato</h3><p>Regras de comportamento: preserve minhas edições, correções locais e mínimas, não toque em arquivos alheios, rode lint e testes antes de dizer “pronto”, não suba o <code>ng serve</code>.</p></li>
-    <li><h3>Ligue todos os agentes</h3><p>Um arquivo fino por ferramenta (Cursor, Cline, Gemini, Copilot…) apontando para o mesmo <code>AGENTS.md</code>. Registre servidores MCP uma vez (Angular CLI, Chrome DevTools, Figma) — isso também contorna o corte de conhecimento do modelo.</p></li>
-  </ol>
-
-  <h3>Laços de feedback (do mais barato ao mais caro)</h3>
-  <div class="loop">
-    <span><b>ng lint</b>regras estáticas</span><i>→</i>
-    <span><b>ng build</b>compila tudo?</span><i>→</i>
-    <span><b>serve</b>você roda, agente usa</span><i>→</i>
-    <span><b>Chrome debug</b>console e rede</span><i>→</i>
-    <span><b>E2E</b>Playwright/Cypress</span>
-  </div>
-  <p class="small">Melhor feedback é o que o harness <em>força</em> (hooks), não o que o agente apenas “promete” fazer.</p>
-</section>
-
-<section id="skills" class="wrap">
-  <h2>Skills: prompt bom ajuda uma vez, skill boa ajuda sempre</h2>
-  <p>Uma <strong>skill</strong> é uma pasta com um <code>SKILL.md</code> (padrão aberto Agent Skills) que o agente só carrega quando a tarefa pede. Em vez de lotar o <code>AGENTS.md</code>, você guarda ali <em>procedimentos</em>: quais passos, quais portões, quem faz o commit.</p>
-  <div class="grid2">
-    <article class="box">
-      <h3>Exemplos do catálogo (31 skills)</h3>
-      <ul class="plain">
-        <li><code>ng-refactor</code> — moderniza um componente legado em 7 passos, com checkpoint humano em cada um.</li>
-        <li><code>ng-forms</code> — Signal Forms.</li>
-        <li><code>ng-data-access</code> — <code>httpResource()</code>, <code>resource()</code>.</li>
-        <li><code>ng-signal-store</code> — só cria store se o estado for mesmo compartilhado.</li>
-        <li><code>ng-testing</code> / <code>create-e2e-tests</code> — Vitest e Playwright.</li>
-        <li><code>ng-security</code>, <code>ng-accessibility</code>, <code>ng-performance</code>, <code>ng-migrate</code>.</li>
-      </ul>
-    </article>
-    <article class="box">
-      <h3>Como escrever uma boa skill</h3>
-      <ul class="plain">
-        <li>Escreva a <em>descrição</em> para o gatilho: “o que faz + quando usar”.</li>
-        <li>Mantenha o <code>SKILL.md</code> enxuto (&lt; 500 linhas); detalhes vão em <code>references/</code>.</li>
-        <li>Codifique <strong>processo</strong>, não conhecimento que o modelo já tem.</li>
-        <li>Decida quem pode disparar (humano, modelo ou ambos).</li>
-        <li>Skills pequenas que delegam entre si.</li>
-        <li>Copie só o que seu projeto usa: cada skill ocupa contexto.</li>
-      </ul>
-    </article>
-  </div>
-  <p class="small">Skills expiram: algumas existem só porque um modelo antigo não era confiável sem elas. Reavalie a cada nova geração.</p>
-</section>
-
-<section id="escolher" class="wrap">
-  <h2>Qual escolher para o meu caso?</h2>
-  <div class="wizard">
-    <fieldset>
-      <legend>Meu código é proprietário de empresa?</legend>
-      <label><input type="radio" name="q1" value="sim"> Sim</label>
-      <label><input type="radio" name="q1" value="nao"> Não / estudo</label>
-    </fieldset>
-    <fieldset>
-      <legend>Meu orçamento</legend>
-      <label><input type="radio" name="q2" value="baixo"> Baixo (~€20–40)</label>
-      <label><input type="radio" name="q2" value="medio"> Médio (€60–100)</label>
-      <label><input type="radio" name="q2" value="alto"> Alto (€200+) ou da empresa</label>
-    </fieldset>
-    <fieldset>
-      <legend>Onde prefiro trabalhar?</legend>
-      <label><input type="radio" name="q3" value="app"> App dedicado</label>
-      <label><input type="radio" name="q3" value="ide"> Dentro da minha IDE</label>
-      <label><input type="radio" name="q3" value="term"> Terminal</label>
-    </fieldset>
-  </div>
-  <div id="answer" class="answer" aria-live="polite">Responda as três perguntas para ver uma sugestão.</div>
-  <p class="small">Regra geral da série: se sua ferramenta não tem agente embutido, use Codex e Claude Desktop; se tem plugins para Codex/Claude Code, experimente-os; no Neovim, use as CLIs.</p>
-</section>
-
-<section class="wrap">
-  <h2>Conclusões da série</h2>
-  <ul class="plain">
-    <li><strong>O modelo importa</strong> — saiba quando usar cada um.</li>
-    <li><strong>O harness importa</strong> — é a alavanca que você controla.</li>
-    <li><strong>O custo real</strong> é por mudança aceita, não por token.</li>
-    <li><strong>A privacidade importa</strong> — aprove caminhos seguros em vez de só proibir.</li>
-    <li><strong>Você continua responsável</strong> pelo diff final. Julgue tudo no seu código, com suas tarefas e seus padrões de revisão.</li>
-  </ul>
+  <p>Resumo não oficial. Conteúdo e opiniões da série são de Alexander Thalhammer / Angular Architects; o MCP segue o angular.dev.</p>
 </section>
 </main>
 
-<footer class="wrap foot">
-  <h2>Fontes</h2>
-  <ol>
-    <li><a href="https://www.angulararchitects.io/blog/best-llms-for-angular/">Which LLM Is Best for Angular Development?</a> (25/mai/2026)</li>
-    <li><a href="https://www.angulararchitects.io/blog/ai-apps-harnesses-for-angular/">Which App/Harness Is Best for Angular Development?</a></li>
-    <li><a href="https://www.angulararchitects.io/blog/ai-costs-for-angular/">What Does AI Coding Really Cost?</a></li>
-    <li><a href="https://www.angulararchitects.io/blog/ai-data-privacy-for-angular/">What Do AI Coding Tools Do With Your Code?</a></li>
-    <li><a href="https://www.angulararchitects.io/blog/ai-personal-verdict/">Agentic Verdict: What’s the Best Solution for You?</a></li>
-    <li><a href="https://www.angulararchitects.io/blog/ai-next-gen-model/">Anthropic Just Released the First Next‑Gen Model to the Public</a></li>
-    <li><a href="https://www.angulararchitects.io/blog/ae-harness-setup-for-angular/">How to Set Up Your Harness for Angular Development</a></li>
-    <li><a href="https://www.angulararchitects.io/blog/ae-summer-2026-update-for-angular/">Agentic Engineering: Summer 2026 Update</a></li>
-    <li><a href="https://www.angulararchitects.io/blog/ae-skills-for-angular/">Skills for Angular Development</a></li>
-    <li><a href="https://angular.dev/ai/mcp">Angular CLI MCP Server</a> (documentação oficial, angular.dev)</li>
-  </ol>
-  <p class="small">Resumo/tradução não oficial. O conteúdo da série e as opiniões são de Alexander Thalhammer e da Angular Architects; o MCP segue a documentação do angular.dev; confira os originais (em inglês) para detalhes e números atualizados.</p>
-</footer>
-<script src="app.js"></script>
+<script>
+const DEEPSWE=[['Opus 5',74],['GPT‑5.6 Sol',73],['Fable 5',70],['GLM‑5.3',69],['Kimi K3',69],['Grok 4.6',67],['GPT‑5.6 Luna (max)',67],['GLM‑5.3 Flash',63],['DeepSeek V4 Pro',63],['Muse Spark 1.2',55],['DeepSeek V4 Flash',53]];
+const $=id=>document.getElementById(id);
+$('bars').innerHTML=DEEPSWE.map(([n,v])=>`<div class="bar"><span>${n}</span><span class="bt"><span class="bf" style="width:${v/80*100}%"></span></span><span class="bv">${v}%</span></div>`).join('');
+
+function calc(){
+  const [a,b]=$('cModel').value.split(',').map(Number);
+  const i=+$('cIn').value||0,o=+$('cOut').value||0,t=+$('cTurns').value||1;
+  const one=i/1e6*a+o/1e6*b,f=n=>n.toLocaleString('pt-BR',{style:'currency',currency:'EUR'});
+  $('cRes').innerHTML=`1 turno ≈ <strong>${f(one)}</strong> · ${t} turnos ≈ <strong>${f(one*t)}</strong>`;
+}
+['cModel','cIn','cOut','cTurns'].forEach(id=>$(id).addEventListener('input',calc));calc();
+
+function advise(){
+  const v=n=>(document.querySelector(`input[name=${n}]:checked`)||{}).value;
+  const [q1,q2,q3]=[v('q1'),v('q2'),v('q3')];
+  if(!q1||!q2||!q3){$('answer').textContent='Marque as três opções.';return}
+  const plano={baixo:'Plano: um de €20 (OpenAI ou Anthropic); suba só ao bater limite.',medio:'Plano: OpenAI + Anthropic (€20 cada), opcional Cursor Pro; €100 no provedor que virar gargalo.',alto:'Plano: €100–200 nos provedores mais usados; equipe: Team Plan.'}[q2];
+  const app={app:'Ambiente: T3 Code (multi‑modelo) ou Codex app.',ide:'Ambiente: extensão oficial do Claude Code/Codex ou Cline; WebStorm + Junie para trabalho manual. Evite basear tudo em Copilot.',term:'Ambiente: opencode; Pi para customizar; CLIs do Codex e Claude Code.'}[q3];
+  const modelo=q2==='baixo'?'Modelo: Sol padrão; GLM‑5.3 Flash (OpenRouter) para o mecânico.':'Modelo: Sol padrão; Fable para arquitetura e revisão; GLM‑5.3 Flash para o braçal.';
+  const priv=q1==='sim'?'Privacidade: amarelo. Só Team/Enterprise/API; sem segredos; Fable exige retenção de 30 dias.':'Privacidade: verde. Conta pessoal serve; sem segredos no contexto.';
+  $('answer').innerHTML=[modelo,app,plano,priv].map(s=>`<p>${s}</p>`).join('');
+}
+document.querySelectorAll('.wiz input').forEach(i=>i.addEventListener('change',advise));
+
+document.querySelectorAll('.code button').forEach(b=>b.addEventListener('click',async()=>{
+  const pre=b.parentElement.querySelector('pre');
+  try{await navigator.clipboard.writeText(pre.textContent);b.textContent='Copiado'}
+  catch(e){const r=document.createRange();r.selectNodeContents(pre);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selecionado'}
+  setTimeout(()=>b.textContent='Copiar',1500);
+}));
+
+const links=[...document.querySelectorAll('#nav a')];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-40% 0px -55% 0px'});
+links.forEach(l=>{const s=document.querySelector(l.getAttribute('href'));if(s)io.observe(s)});
+</script>
+
 </body>
 </html>
