@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Melhor LLM para Angular</title>
+<meta name="description" content="Resumo em português da série Agentic Engineering (Angular Architects): modelos, harnesses, apps, custos, privacidade e skills.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top">
+  <nav class="wrap">
+    <a class="brand" href="#topo">LLMs para Angular</a>
+    <div class="links">
+      <a href="#ranking">Ranking</a>
+      <a href="#modelos">Modelos</a>
+      <a href="#harness">Harness</a>
+      <a href="#custos">Custos</a>
+      <a href="#privacidade">Privacidade</a>
+      <a href="#setup">Setup</a>
+      <a href="#skills">Skills</a>
+      <a href="#escolher">Qual escolher?</a>
+    </div>
+  </nav>
+</header>
+
+<main id="topo">
+<section class="hero wrap">
+  <p class="eyebrow">Resumo da série “Agentic Engineering” · Alexander Thalhammer, Angular Architects</p>
+  <h1>Qual IA usar para programar Angular?</h1>
+  <p class="lead">Em 2026 a resposta mudou várias vezes. Este guia resume os 9 artigos da série (mai–set/2026) em um só lugar: <strong>modelo</strong>, <strong>harness</strong>, <strong>app</strong>, <strong>custo</strong> e <strong>privacidade</strong>.</p>
+  <div class="tldr">
+    <h2>Em 30 segundos</h2>
+    <ul>
+      <li><strong>Modelos (ago/2026):</strong> 🥇 Fable 5 (arquitetura e problemas longos), 🥈 GPT‑5.6 Sol (implementação do dia a dia), 🥉 GLM‑5.3 Flash (rápido e barato para trabalho mecânico).</li>
+      <li><strong>Fluxo preferido do autor:</strong> o modelo caro <em>planeja e revisa</em>; um modelo mais barato <em>implementa</em> como sub‑agente.</li>
+      <li><strong>O harness importa tanto quanto o modelo:</strong> o mesmo modelo rende bem diferente em ferramentas diferentes.</li>
+      <li><strong>Métrica que importa:</strong> custo por mudança <em>aceita, revisada e mergeada</em> — não preço por token.</li>
+      <li><strong>Sempre:</strong> revisar todo diff e nunca enviar segredos ou dados de produção para a IA.</li>
+    </ul>
+  </div>
+  <p class="note">⚠️ É uma opinião pessoal baseada em trabalho real com Angular, <strong>não um benchmark científico</strong>. Os próprios autores repetem: teste no seu código. Números são fotos de datas específicas.</p>
+</section>
+
+<section id="ranking" class="wrap">
+  <h2>Como o ranking mudou</h2>
+  <p>Os modelos giram rápido; os apps, a cada poucos meses; o setup do harness quase não muda.</p>
+  <ol class="timeline">
+    <li>
+      <time>Mai/2026</time>
+      <h3>Primeiro ranking</h3>
+      <p>🥇 Opus 4.7 (melhor para Angular) · GPT 5.5 (melhor “todo‑terreno”) · Composer 2.5 (novato rápido e barato) · Gemini 3.5 Flash (experimental).</p>
+    </li>
+    <li>
+      <time>9 jun/2026</time>
+      <h3>Fable 5 chega</h3>
+      <p>Nova geração da Anthropic: escreve código “melhor do que eu escreveria”, aguenta problemas longos sozinho. Foi desligado em 12/jun por uma diretiva do governo dos EUA e voltou em 2/jul.</p>
+    </li>
+    <li>
+      <time>Ago/2026</time>
+      <h3>Atualização de verão</h3>
+      <p>Novo trio: Fable 5, GPT‑5.6 Sol e GLM‑5.3 Flash. App favorito vira o T3 Code (open source).</p>
+    </li>
+    <li>
+      <time>Set/2026</time>
+      <h3>Fable 5.1</h3>
+      <p>Substitui o Fable 5 no setup do autor; esforço padrão cai para <em>medium</em> sem perda perceptível.</p>
+    </li>
+  </ol>
+
+  <h3>Pódio de agosto/2026</h3>
+  <div class="podium">
+    <article><h4>Modelos</h4><ol><li>🥇 Fable 5</li><li>🥈 GPT‑5.6 Sol</li><li>🥉 GLM‑5.3 Flash</li></ol></article>
+    <article><h4>Harnesses</h4><ol><li>🥇 opencode</li><li>🥈 Claude Code</li><li>🥉 Cursor CLI</li></ol></article>
+    <article><h4>Apps</h4><ol><li>🥇 T3 Code</li><li>🥈 Codex app</li><li>🥉 Cursor</li></ol></article>
+    <article><h4>Custo por mudança aceita</h4><ol><li>🥇 GLM‑5.3 Flash</li><li>🥈 GPT‑5.6 Sol</li><li>🥉 Fable 5</li></ol></article>
+  </div>
+</section>
+
+<section id="modelos" class="wrap">
+  <h2>Modelos</h2>
+  <p>Não existe benchmark público específico de Angular. O autor cruza benchmarks gerais (principalmente o <strong>DeepSWE</strong>) com a experiência dele.</p>
+
+  <h3>DeepSWE v1.1 (pass@1, snapshot de 26/ago/2026)</h3>
+  <p class="small">Mede se o agente acha o lugar certo no código e implementa uma mudança a partir de um pedido curto. Margem de erro de ±3 a ±4 pontos: os três primeiros empatam estatisticamente.</p>
+  <div id="bars" class="bars" role="img" aria-label="Gráfico de barras do DeepSWE por modelo"></div>
+
+  <h3>Perfil de cada modelo</h3>
+  <div class="chips" id="filters" role="group" aria-label="Filtrar modelos">
+    <button class="chip on" data-f="todos">Todos</button>
+    <button class="chip" data-f="qualidade">Qualidade máxima</button>
+    <button class="chip" data-f="equilibrio">Equilíbrio</button>
+    <button class="chip" data-f="barato">Barato / rápido</button>
+  </div>
+  <div class="cards" id="cards"></div>
+
+  <h3>E os outros?</h3>
+  <ul class="plain">
+    <li><strong>Gemini / Antigravity:</strong> o autor acha o Google “bem atrás” dos três grandes; o Gemini tende a usar idiomas antigos de Angular e precisa de mais direcionamento.</li>
+    <li><strong>Modelos chineses (DeepSeek, Qwen, Kimi, GLM):</strong> melhoraram muito; GLM‑5.3 Flash entrou no pódio. Kimi K3 e GLM‑5.3 completos chegam a 69%, mas custam ~€4 por tarefa.</li>
+    <li><strong>Europeus (Mistral):</strong> opção estratégica quando residência de dados importa, não líderes em código.</li>
+    <li><strong>Locais / open‑weight:</strong> úteis para privacidade e CI, mas ainda não no nível dos favoritos para Angular corporativo. Atenção: “open weights” não é “open source”.</li>
+  </ul>
+</section>
+
+<section id="harness" class="wrap">
+  <h2>Modelo, harness e app não são a mesma coisa</h2>
+  <div class="layers">
+    <div class="layer l1"><strong>Modelo</strong><span>O cérebro (ex.: Opus, GPT). Só gera texto.</span></div>
+    <div class="layer l2"><strong>Harness</strong><span>O software em volta: dá ferramentas (ler, buscar, editar, rodar <code>ng build</code>) e executa o laço “propõe → executa → lê resultado → decide”.</span></div>
+    <div class="layer l3"><strong>App</strong><span>A janela onde você vê tudo (desktop, terminal, extensão de IDE).</span></div>
+  </div>
+  <p>O mesmo harness vive em vários apps (Claude Code roda no app desktop, CLI, VS Code, JetBrains). E o mesmo modelo muda de resultado conforme o harness: num teste da Artificial Analysis com o <em>mesmo Opus 4.7 (medium)</em>, opencode fez 51, Cursor CLI 47 e Claude Code 42.</p>
+
+  <div class="grid2">
+    <article class="box">
+      <h3>Apps (“super apps”)</h3>
+      <ul class="plain">
+        <li><strong>T3 Code</strong> — open source, qualquer modelo/provedor, controle remoto pelo celular via Tailscale, sidebar tipo “caixa de entrada”.</li>
+        <li><strong>Codex app</strong> — o mais polido; ótimo para “computer use” (navegador, screenshots). Só modelos da OpenAI.</li>
+        <li><strong>Claude Desktop</strong> — casa natural do Claude Code; fora do pódio desde que o T3 Code faz o mesmo com mais modelos.</li>
+        <li><strong>Cursor</strong> — melhor integração com IDE e agentes na nuvem; atenção: acesso a modelos OpenAI via Cursor pode acabar em 12/nov.</li>
+        <li><strong>Antigravity 2.0</strong> — promissor, mas ainda “desajeitado e com bugs”.</li>
+      </ul>
+    </article>
+    <article class="box">
+      <h3>Harnesses e IDEs</h3>
+      <ul class="plain">
+        <li><strong>opencode</strong> — open source, agnóstico de modelo; ponto de partida recomendado no terminal.</li>
+        <li><strong>Pi</strong> — minimalista, para quem gosta de customizar.</li>
+        <li><strong>Claude Code</strong> — excelente para orquestrar sub‑agentes (<code>.claude/agents/</code>), hooks e <code>/loop</code>.</li>
+        <li><strong>Cline</strong> — extensão open source para VS Code/JetBrains; pode usar suas assinaturas.</li>
+        <li><strong>VS Code + Copilot</strong> — o autor desaconselha como base: o agente ainda fica um passo atrás.</li>
+        <li><strong>WebStorm + Junie</strong> — bom para trabalho cuidadoso “feito à mão”.</li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="callout">
+    <h3>Seu código também é um fator</h3>
+    <p>O agente <em>imita</em> o que lê. Em código limpo e moderno, ele escreve código limpo. Em legado (NgModules, <code>*ngIf</code>, RxJS onde caberiam signals), ele copia a bagunça. <strong>Quanto pior o código, mais o setup do harness importa.</strong></p>
+  </div>
+</section>
+
+<section id="custos" class="wrap">
+  <h2>Custos</h2>
+  <p>Assinaturas são <strong>subsidiadas</strong>: são, de longe, o melhor negócio hoje. Mas são para uso humano — não para CI ou backend de produto — e em empresa precisam casar com compras e políticas.</p>
+
+  <div class="steps">
+    <div><b>€40/mês</b><span>OpenAI Plus + Anthropic Pro: ponto de partida recomendado.</span></div>
+    <div><b>€60/mês</b><span>Some Cursor Pro por um mês para comparar três apps.</span></div>
+    <div><b>€100</b><span>Suba o plano do provedor que virou seu gargalo.</span></div>
+    <div><b>€200</b><span>Só para uso realmente pesado (~20x).</span></div>
+  </div>
+  <p class="small">Preços originais em dólar; euros aproximados. Confira as páginas oficiais antes de decidir.</p>
+
+  <h3>Calculadora rápida de custo por API</h3>
+  <p class="small">Valores do artigo de ago/2026 (por milhão de tokens, sem desconto de cache/batch). Ajuste e veja o custo de um “turno” do agente.</p>
+  <div class="calc">
+    <label>Modelo
+      <select id="cModel">
+        <option value="5,30">GPT 5.5 (≈ €5 in / €30 out)</option>
+        <option value="5,25">Claude Opus 4.8 (≈ €5 in / €25 out)</option>
+        <option value="10,50">Fable 5 (≈ €10 in / €50 out)</option>
+      </select>
+    </label>
+    <label>Tokens de entrada <input id="cIn" type="number" value="200000" min="0" step="10000"></label>
+    <label>Tokens de saída <input id="cOut" type="number" value="20000" min="0" step="1000"></label>
+    <label>Turnos <input id="cTurns" type="number" value="20" min="1"></label>
+    <output id="cRes" aria-live="polite"></output>
+  </div>
+
+  <h3>Esforço de raciocínio</h3>
+  <ul class="plain">
+    <li><strong>Low</strong> — edições pequenas · <strong>Medium</strong> — implementação normal · <strong>High</strong> — bugs difíceis, criar componente, refatoração · <strong>Extra/Max</strong> — quando errar custa mais que os tokens.</li>
+    <li>Regra do autor: comece em high; se o resultado for perfeito, reduza. Para o Fable, medium já basta (65% no DeepSWE por ~€5,50/tarefa).</li>
+  </ul>
+
+  <h3>Como economizar o Fable</h3>
+  <ol class="plain num">
+    <li><strong>Sol é o padrão, Fable é a exceção</strong> (vago, arquitetura, revisão, longo prazo).</li>
+    <li>Esforço medium/high, não max (max dobra a conta por ~1 ponto).</li>
+    <li><strong>Planeje antes</strong>, depois deixe rodar.</li>
+    <li>Contexto enxuto: thread nova por tarefa, <code>AGENTS.md</code> curto, pouca saída de terminal.</li>
+    <li><strong>Delegue o trabalho braçal</strong> a um sub‑agente mais barato.</li>
+  </ol>
+  <p class="small">Custo por tarefa no DeepSWE (high → max): Fable ≈ €8,50 → €20 · Opus 5 ≈ €5,50 → €11 · GPT‑5.6 Sol ≈ €2,50 → €6 · GLM‑5.3 Flash ≈ €0,25.</p>
+</section>
+
+<section id="privacidade" class="wrap">
+  <h2>Privacidade: não proíba, aprove caminhos seguros</h2>
+  <p>Agentes enviam muito mais que o prompt: trechos de código, diffs, saída de terminal, caminhos, screenshots, stack traces… E eles <strong>executam comandos</strong>, o que cria risco de vazamento (a “tríade letal”: dados privados + conteúdo não confiável + saída para a rede).</p>
+
+  <div class="traffic">
+    <div class="g"><h3>🟢 Verde</h3><p>Aprendizado, experimentos, código público/open source. Assinatura pessoal serve.</p></div>
+    <div class="y"><h3>🟡 Amarelo</h3><p>Código proprietário. Só em termos aprovados: business, team, enterprise ou API.</p></div>
+    <div class="r"><h3>🔴 Vermelho</h3><p>Segredos, credenciais, dados de produção/clientes/pessoais regulados. Nunca no contexto da IA.</p></div>
+  </div>
+
+  <ul class="plain">
+    <li><strong>“Sem treino” ≠ “sem retenção”.</strong> Provedores podem reter dados por abuso, segurança, depuração ou obrigação legal.</li>
+    <li><strong>Planos pessoais vs. comerciais:</strong> pessoais podem usar seus dados para treino se você não desativar; planos comerciais e API normalmente não treinam por padrão.</li>
+    <li><strong>Fable 5:</strong> exige retenção de 30 dias, sem opção de zero retenção — pode inviabilizar setores regulados.</li>
+    <li><strong>Esconda segredos do agente:</strong> bloqueie <code>.env</code>, <code>*.pem</code>, <code>*.key</code> e <code>environment*.ts</code> (no Claude Code, via <code>permissions.deny</code>).</li>
+    <li><strong>Na UE:</strong> LGPD/GDPR, contrato de processamento de dados, residência de dados e, a partir de 2/ago/2026, fiscalização do AI Act.</li>
+  </ul>
+  <details>
+    <summary>Perguntas a fazer a qualquer fornecedor</summary>
+    <ul class="plain">
+      <li>Meu código é usado para treino por padrão? Dá para desativar na organização toda?</li>
+      <li>O que é retido, onde e por quanto tempo? Há zero retenção ou processamento regional?</li>
+      <li>Quais subprocessadores? Há revisão humana?</li>
+      <li>Como tratam prompts, diffs, screenshots e saída de terminal?</li>
+      <li>Admins podem desligar conectores, navegador, servidores MCP e agentes na nuvem?</li>
+    </ul>
+  </details>
+</section>
+
+<section id="setup" class="wrap">
+  <h2>Setup do harness para Angular (5 passos)</h2>
+  <p>O repositório de exemplo do autor é o <code>ng-agentic</code>. A ideia: o agente só escreve o Angular que <em>você</em> quer se o ambiente disser como.</p>
+  <ol class="setup">
+    <li><h3>Base limpa</h3><p>Comece de um <code>ng new</code> atual (ou identifique a base legada que você já tem).</p></li>
+    <li><h3>Formatação e lint obrigatórios</h3><p>Hook de pre‑commit (Husky) para rodar Prettier/ESLint em todo commit, venha o código de você ou da IA.</p></li>
+    <li><h3>Guia de estilo ⭐</h3><p>O arquivo de <strong>maior alavancagem</strong> de todo o setup. O modelo sabe Angular genérico; o guia diz como <em>seu time</em> escreve (Vitest em vez de Jest, signals em vez de RxJS, zoneless, etc.).</p></li>
+    <li><h3><code>AGENTS.md</code> como contrato</h3><p>Regras de comportamento: preserve minhas edições, correções locais e mínimas, não toque em arquivos alheios, rode lint e testes antes de dizer “pronto”, não suba o <code>ng serve</code>.</p></li>
+    <li><h3>Ligue todos os agentes</h3><p>Um arquivo fino por ferramenta (Cursor, Cline, Gemini, Copilot…) apontando para o mesmo <code>AGENTS.md</code>. Registre servidores MCP uma vez (Angular CLI, Chrome DevTools, Figma) — isso também contorna o corte de conhecimento do modelo.</p></li>
+  </ol>
+
+  <h3>Laços de feedback (do mais barato ao mais caro)</h3>
+  <div class="loop">
+    <span><b>ng lint</b>regras estáticas</span><i>→</i>
+    <span><b>ng build</b>compila tudo?</span><i>→</i>
+    <span><b>serve</b>você roda, agente usa</span><i>→</i>
+    <span><b>Chrome debug</b>console e rede</span><i>→</i>
+    <span><b>E2E</b>Playwright/Cypress</span>
+  </div>
+  <p class="small">Melhor feedback é o que o harness <em>força</em> (hooks), não o que o agente apenas “promete” fazer.</p>
+</section>
+
+<section id="skills" class="wrap">
+  <h2>Skills: prompt bom ajuda uma vez, skill boa ajuda sempre</h2>
+  <p>Uma <strong>skill</strong> é uma pasta com um <code>SKILL.md</code> (padrão aberto Agent Skills) que o agente só carrega quando a tarefa pede. Em vez de lotar o <code>AGENTS.md</code>, você guarda ali <em>procedimentos</em>: quais passos, quais portões, quem faz o commit.</p>
+  <div class="grid2">
+    <article class="box">
+      <h3>Exemplos do catálogo (31 skills)</h3>
+      <ul class="plain">
+        <li><code>ng-refactor</code> — moderniza um componente legado em 7 passos, com checkpoint humano em cada um.</li>
+        <li><code>ng-forms</code> — Signal Forms.</li>
+        <li><code>ng-data-access</code> — <code>httpResource()</code>, <code>resource()</code>.</li>
+        <li><code>ng-signal-store</code> — só cria store se o estado for mesmo compartilhado.</li>
+        <li><code>ng-testing</code> / <code>create-e2e-tests</code> — Vitest e Playwright.</li>
+        <li><code>ng-security</code>, <code>ng-accessibility</code>, <code>ng-performance</code>, <code>ng-migrate</code>.</li>
+      </ul>
+    </article>
+    <article class="box">
+      <h3>Como escrever uma boa skill</h3>
+      <ul class="plain">
+        <li>Escreva a <em>descrição</em> para o gatilho: “o que faz + quando usar”.</li>
+        <li>Mantenha o <code>SKILL.md</code> enxuto (&lt; 500 linhas); detalhes vão em <code>references/</code>.</li>
+        <li>Codifique <strong>processo</strong>, não conhecimento que o modelo já tem.</li>
+        <li>Decida quem pode disparar (humano, modelo ou ambos).</li>
+        <li>Skills pequenas que delegam entre si.</li>
+        <li>Copie só o que seu projeto usa: cada skill ocupa contexto.</li>
+      </ul>
+    </article>
+  </div>
+  <p class="small">Skills expiram: algumas existem só porque um modelo antigo não era confiável sem elas. Reavalie a cada nova geração.</p>
+</section>
+
+<section id="escolher" class="wrap">
+  <h2>Qual escolher para o meu caso?</h2>
+  <div class="wizard">
+    <fieldset>
+      <legend>Meu código é proprietário de empresa?</legend>
+      <label><input type="radio" name="q1" value="sim"> Sim</label>
+      <label><input type="radio" name="q1" value="nao"> Não / estudo</label>
+    </fieldset>
+    <fieldset>
+      <legend>Meu orçamento</legend>
+      <label><input type="radio" name="q2" value="baixo"> Baixo (~€20–40)</label>
+      <label><input type="radio" name="q2" value="medio"> Médio (€60–100)</label>
+      <label><input type="radio" name="q2" value="alto"> Alto (€200+) ou da empresa</label>
+    </fieldset>
+    <fieldset>
+      <legend>Onde prefiro trabalhar?</legend>
+      <label><input type="radio" name="q3" value="app"> App dedicado</label>
+      <label><input type="radio" name="q3" value="ide"> Dentro da minha IDE</label>
+      <label><input type="radio" name="q3" value="term"> Terminal</label>
+    </fieldset>
+  </div>
+  <div id="answer" class="answer" aria-live="polite">Responda as três perguntas para ver uma sugestão.</div>
+  <p class="small">Regra geral da série: se sua ferramenta não tem agente embutido, use Codex e Claude Desktop; se tem plugins para Codex/Claude Code, experimente-os; no Neovim, use as CLIs.</p>
+</section>
+
+<section class="wrap">
+  <h2>Conclusões da série</h2>
+  <ul class="plain">
+    <li><strong>O modelo importa</strong> — saiba quando usar cada um.</li>
+    <li><strong>O harness importa</strong> — é a alavanca que você controla.</li>
+    <li><strong>O custo real</strong> é por mudança aceita, não por token.</li>
+    <li><strong>A privacidade importa</strong> — aprove caminhos seguros em vez de só proibir.</li>
+    <li><strong>Você continua responsável</strong> pelo diff final. Julgue tudo no seu código, com suas tarefas e seus padrões de revisão.</li>
+  </ul>
+</section>
+</main>
+
+<footer class="wrap foot">
+  <h2>Fontes (artigos lidos)</h2>
+  <ol>
+    <li><a href="https://www.angulararchitects.io/blog/best-llms-for-angular/">Which LLM Is Best for Angular Development?</a> (25/mai/2026)</li>
+    <li><a href="https://www.angulararchitects.io/blog/ai-apps-harnesses-for-angular/">Which App/Harness Is Best for Angular Development?</a></li>
+    <li><a href="https://www.angulararchitects.io/blog/ai-costs-for-angular/">What Does AI Coding Really Cost?</a></li>
+    <li><a href="https://www.angulararchitects.io/blog/ai-data-privacy-for-angular/">What Do AI Coding Tools Do With Your Code?</a></li>
+    <li><a href="https://www.angulararchitects.io/blog/ai-personal-verdict/">Agentic Verdict: What’s the Best Solution for You?</a></li>
+    <li><a href="https://www.angulararchitects.io/blog/ai-next-gen-model/">Anthropic Just Released the First Next‑Gen Model to the Public</a></li>
+    <li><a href="https://www.angulararchitects.io/blog/ae-harness-setup-for-angular/">How to Set Up Your Harness for Angular Development</a></li>
+    <li><a href="https://www.angulararchitects.io/blog/ae-summer-2026-update-for-angular/">Agentic Engineering: Summer 2026 Update</a></li>
+    <li><a href="https://www.angulararchitects.io/blog/ae-skills-for-angular/">Skills for Angular Development</a></li>
+  </ol>
+  <p class="small">Resumo/tradução não oficial. Todo o conteúdo e as opiniões são de Alexander Thalhammer e da Angular Architects; confira os originais (em inglês) para detalhes e números atualizados.</p>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>
