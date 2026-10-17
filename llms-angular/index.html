@@ -15,6 +15,7 @@
       <a href="#ranking">Ranking</a>
       <a href="#modelos">Modelos</a>
       <a href="#harness">Harness</a>
+      <a href="#mcp">MCP</a>
       <a href="#custos">Custos</a>
       <a href="#privacidade">Privacidade</a>
       <a href="#setup">Setup</a>
@@ -140,6 +141,70 @@
     <h3>Seu código também é um fator</h3>
     <p>O agente <em>imita</em> o que lê. Em código limpo e moderno, ele escreve código limpo. Em legado (NgModules, <code>*ngIf</code>, RxJS onde caberiam signals), ele copia a bagunça. <strong>Quanto pior o código, mais o setup do harness importa.</strong></p>
   </div>
+</section>
+
+<section id="mcp" class="wrap">
+  <h2>Servidor MCP do Angular CLI</h2>
+  <p>O Angular CLI traz um servidor <strong>MCP</strong> (Model Context Protocol) oficial. Ele dá ao agente <em>ferramentas de ação</em> para falar direto com o CLI: analisar o workspace, buscar na documentação, compilar e rodar testes. Funciona com Cursor, Antigravity, JetBrains AI, VS Code etc. É a forma oficial de resolver o corte de conhecimento do modelo: ele consulta a doc atual em vez de lembrar de versões antigas.</p>
+
+  <h3>Como ativar</h3>
+  <p>Configure sua IDE ou CLI para rodar <code>npx -y @angular/cli mcp</code>. O arquivo muda por ferramenta:</p>
+  <div class="grid2">
+    <article class="box"><h4>Cursor</h4><p class="small"><code>.cursor/mcp.json</code> (ou global em <code>~/.cursor/mcp.json</code>)</p>
+<pre>{
+  "mcpServers": {
+    "angular-cli": {
+      "command": "npx",
+      "args": ["-y", "@angular/cli", "mcp"]
+    }
+  }
+}</pre></article>
+    <article class="box"><h4>VS Code</h4><p class="small"><code>.vscode/mcp.json</code> (note: a chave é <code>servers</code>)</p>
+<pre>{
+  "servers": {
+    "angular-cli": {
+      "command": "npx",
+      "args": ["-y", "@angular/cli", "mcp"]
+    }
+  }
+}</pre></article>
+  </div>
+  <p class="small">Antigravity usa o mesmo formato do Cursor, em <code>.antigravity/mcp.json</code>.</p>
+
+  <h3>Ferramentas disponíveis (padrão)</h3>
+  <div class="tools">
+    <div><code>list_projects</code><span>Lista apps e libs do workspace lendo o <code>angular.json</code>.</span></div>
+    <div><code>get_best_practices</code><span>Guia de boas práticas alinhado à versão (standalone, formulários tipados etc.).</span></div>
+    <div><code>search_documentation</code><span>Busca na documentação oficial do angular.dev.</span></div>
+    <div><code>run_target</code><span>Executa um alvo configurado: build, test, lint, e2e, deploy.</span></div>
+    <div><code>devserver_start</code><span>Inicia o <code>ng serve</code> de forma assíncrona.</span></div>
+    <div><code>devserver_wait_for_build</code><span>Devolve os logs do build mais recente do dev server.</span></div>
+    <div><code>devserver_stop</code><span>Para o dev server.</span></div>
+    <div><code>onpush_zoneless_migration</code><span>Gera o plano, passo a passo, para migrar a OnPush (pré-requisito do zoneless).</span></div>
+    <div><code>ai_tutor</code><span>Tutor interativo de Angular.</span></div>
+  </div>
+
+  <h3>Fluxos típicos</h3>
+  <div class="grid2">
+    <article class="box"><h4>Feature com laço de TDD</h4>
+      <ol class="plain"><li><code>search_documentation</code> para conferir APIs (ex.: opções do <code>@defer</code>)</li><li><code>get_best_practices</code> para carregar as regras da sua versão</li><li><code>devserver_start</code> e <code>devserver_wait_for_build</code> ao editar</li><li>Escrever o teste (descobrindo o framework via <code>list_projects</code>) e rodar <code>run_target</code> com <code>test</code></li><li><code>devserver_stop</code> ao terminar</li></ol></article>
+    <article class="box"><h4>Migração zoneless / OnPush</h4>
+      <ol class="plain"><li><code>list_projects</code> para localizar os componentes</li><li>Rodar migrações de signals via <code>ng generate</code></li><li><code>onpush_zoneless_migration</code> com o caminho do componente</li><li>Aplicar a única mudança devolvida e testar com <code>run_target</code></li><li>Repetir até a ferramenta indicar que terminou</li></ol></article>
+  </div>
+  <p>O terceiro fluxo é o de <strong>aprendizado</strong>: <code>ai_tutor</code> carrega o currículo e o agente guia você em um sandbox.</p>
+
+  <h3>Opções de linha de comando</h3>
+  <ul class="plain">
+    <li><code>--read-only</code> registra só ferramentas que <strong>não modificam</strong> o projeto (bom para começar com segurança).</li>
+    <li><code>--local-only</code> registra só ferramentas que <strong>não precisam de internet</strong> (útil em ambientes restritos; desliga, por exemplo, a busca na documentação).</li>
+  </ul>
+  <pre class="solo">"args": ["-y", "@angular/cli", "mcp", "--read-only"]</pre>
+
+  <div class="callout">
+    <h3>MCP + Skills = agente completo</h3>
+    <p>As skills oficiais do Angular dão a <em>orientação</em> (padrões e instruções); o MCP dá as <em>ações</em> (compilar, testar, analisar). Juntos cobrem o que a série chama de “ferramentas + procedimentos”. No setup do autor, o MCP do Angular CLI é registrado uma única vez em <code>.mcp.json</code> para todos os agentes.</p>
+  </div>
+  <p class="small">Fonte: <a href="https://angular.dev/ai/mcp">angular.dev/ai/mcp</a>. Segurança: o servidor roda comandos no seu projeto; lembre do semáforo de privacidade e prefira <code>--read-only</code> quando possível.</p>
 </section>
 
 <section id="custos" class="wrap">
@@ -306,7 +371,7 @@
 </main>
 
 <footer class="wrap foot">
-  <h2>Fontes (artigos lidos)</h2>
+  <h2>Fontes</h2>
   <ol>
     <li><a href="https://www.angulararchitects.io/blog/best-llms-for-angular/">Which LLM Is Best for Angular Development?</a> (25/mai/2026)</li>
     <li><a href="https://www.angulararchitects.io/blog/ai-apps-harnesses-for-angular/">Which App/Harness Is Best for Angular Development?</a></li>
@@ -317,8 +382,9 @@
     <li><a href="https://www.angulararchitects.io/blog/ae-harness-setup-for-angular/">How to Set Up Your Harness for Angular Development</a></li>
     <li><a href="https://www.angulararchitects.io/blog/ae-summer-2026-update-for-angular/">Agentic Engineering: Summer 2026 Update</a></li>
     <li><a href="https://www.angulararchitects.io/blog/ae-skills-for-angular/">Skills for Angular Development</a></li>
+    <li><a href="https://angular.dev/ai/mcp">Angular CLI MCP Server</a> (documentação oficial, angular.dev)</li>
   </ol>
-  <p class="small">Resumo/tradução não oficial. Todo o conteúdo e as opiniões são de Alexander Thalhammer e da Angular Architects; confira os originais (em inglês) para detalhes e números atualizados.</p>
+  <p class="small">Resumo/tradução não oficial. O conteúdo da série e as opiniões são de Alexander Thalhammer e da Angular Architects; o MCP segue a documentação do angular.dev; confira os originais (em inglês) para detalhes e números atualizados.</p>
 </footer>
 <script src="app.js"></script>
 </body>
